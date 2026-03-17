@@ -1,36 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Recommender</title>
-</head>
-<body>
-    <h1>Book Recommender</h1>
-    <p>Enter book title and rating to add to shelf:</p>
-    <input type="text" id="bookTitle" placeholder="Enter book title">
-    <input type="text" id="rating" placeholder="Did you like it? (yes/no)">
-    <button onclick="addBook()">Add Book To Shelf</button>
-    <div id="shelf"></div>
-    <script>
-        const books = [];
-        function addBook() {
-            const bookTitle = document.getElementById('bookTitle').value;
-            const rating = document.getElementById('rating').value;
-            
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Book Recommender</title>
+    </head>
+    <body>
+        <h1>Book Recommender</h1>
+        <p>Enter book title and rating to add to shelf:</p>
+        <input type="text" id="bookTitle" placeholder="Enter book title" />
+        <input
+            type="text"
+            id="rating"
+            placeholder="Did you like it? (yes/no)"
+        />
+        <button onclick="addBook()">Add Book To Shelf</button>
+        <div id="shelf"></div>
+        <script>
+            const books = [];
+            function addBook() {
+                const bookTitle = document.getElementById("bookTitle").value;
+                const rating = document.getElementById("rating").value;
 
-            const newBook = {title: bookTitle, rating: rating};
-            books.push(newBook);
+                const newBook = { title: bookTitle, rating: rating };
+                books.push(newBook);
 
-            
+                shelfDiv = document.getElementById("shelf");
 
-            shelfDiv = document.getElementById('shelf');
-
-             shelfDiv.innerHTML = '<h2>Shelf:</h2><ul>' + 
-        books.map(book => `<li> <b>Title: </b>${book.title}&emsp; <b>Rating: </b>${book.rating}</li>`).join('') + 
-    '</ul>';
-
-        }
-    </script>
-</body>
+                shelfDiv.innerHTML =
+                    "<h2>Shelf:</h2><ul>" +
+                    books
+                        .map(
+                            (book) =>
+                                `<li> <b>Title: </b>${book.title}&emsp; <b>Rating: </b>${book.rating}</li>`,
+                        )
+                        .join("") +
+                    "</ul>";
+                document.getElementById("bookTitle").value = "";
+                document.getElementById("rating").value = "";
+            }
+        </script>
+    </body>
 </html>
