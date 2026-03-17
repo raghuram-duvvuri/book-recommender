@@ -13,11 +13,11 @@
     <button onclick="addBook()">Add Book To Shelf</button>
     <div id="shelf"></div>
     <script>
+        const books = [];
         function addBook() {
             const bookTitle = document.getElementById('bookTitle').value;
             const rating = document.getElementById('rating').value;
             
-            const books = [];
 
             const newBook = {title: bookTitle, rating: rating};
             books.push(newBook);
