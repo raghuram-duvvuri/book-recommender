@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender</title>
+</head>
+<body>
+    <h1>Book Recommender</h1>
+    <p>Welcome to the Book Recommender!</p>
+    <p>Enter a book title to get recommendations:</p>
+    <input type="text" id="bookTitle" placeholder="Enter book title">
+    <button onclick="getRecommendations()">Get Recommendations</button>
+    <div id="recommendations"></div>
+    <script>
+        function getRecommendations() {
+            const bookTitle = document.getElementById('bookTitle').value;
+            // API call would go here
+            const recommendations = [
+                "Book 1: The Great Gatsby",
+                "Book 2: To Kill a Mockingbird",
+                "Book 3: 1984",
+                "Book 4: The Catcher in the Rye"
+            ];
+            const recommendationsDiv = document.getElementById('recommendations');
+            recommendationsDiv.innerHTML = '<h2>Recommendations:</h2><ul>' + recommendations.map(book => `<li>${book}</li>`).join('') + '</ul>';
+        }
+    </script>
+</body>
+</html>
