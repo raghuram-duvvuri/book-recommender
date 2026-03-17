@@ -7,23 +7,29 @@
 </head>
 <body>
     <h1>Book Recommender</h1>
-    <p>Welcome to the Book Recommender!</p>
-    <p>Enter a book title to get recommendations:</p>
+    <p>Enter book title and rating to add to shelf:</p>
     <input type="text" id="bookTitle" placeholder="Enter book title">
-    <button onclick="getRecommendations()">Get Recommendations</button>
-    <div id="recommendations"></div>
+    <input type="text" id="rating" placeholder="Did you like it? (yes/no)">
+    <button onclick="addBook()">Add Book To Shelf</button>
+    <div id="shelf"></div>
     <script>
-        function getRecommendations() {
+        function addBook() {
             const bookTitle = document.getElementById('bookTitle').value;
-            // API call would go here
-            const recommendations = [
-                "Book 1: The Great Gatsby",
-                "Book 2: To Kill a Mockingbird",
-                "Book 3: 1984",
-                "Book 4: The Catcher in the Rye"
-            ];
-            const recommendationsDiv = document.getElementById('recommendations');
-            recommendationsDiv.innerHTML = '<h2>Recommendations:</h2><ul>' + recommendations.map(book => `<li>${book}</li>`).join('') + '</ul>';
+            const rating = document.getElementById('rating').value;
+            
+            const books = [];
+
+            const newBook = {title: bookTitle, rating: rating};
+            books.push(newBook);
+
+            
+
+            shelfDiv = document.getElementById('shelf');
+
+             shelfDiv.innerHTML = '<h2>Shelf:</h2><ul>' + 
+        books.map(book => `<li> <b>Title: </b>${book.title}&emsp; <b>Rating: </b>${book.rating}</li>`).join('') + 
+    '</ul>';
+
         }
     </script>
 </body>
