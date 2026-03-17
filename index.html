@@ -9,22 +9,70 @@
         <h1>Book Recommender</h1>
         <p>Enter book title and rating to add to shelf:</p>
         <input type="text" id="bookTitle" placeholder="Enter book title" />
-        <input
-            type="text"
-            id="rating"
-            placeholder="Did you like it? (yes/no)"
-        />
+        <input type="radio" name="rating" id="positiveRating" />
+        <label for="positiveRating">👍</label>
+        <input type="radio" name="rating" id="negativeRating" />
+        <label for="negativeRating">👎</label>
         <button onclick="addBook()">Add Book To Shelf</button>
+        <button
+            onclick="
+                localStorage.clear();
+                loadBooksFromLocalStorage();
+            "
+        >
+            Clear Shelf
+        </button>
         <div id="shelf"></div>
         <script>
-            const books = [];
+            let books = [];
+            document.addEventListener(
+                "DOMContentLoaded",
+                loadBooksFromLocalStorage(),
+            );
+
             function addBook() {
+                loadBooksFromLocalStorage();
                 const bookTitle = document.getElementById("bookTitle").value;
-                const rating = document.getElementById("rating").value;
+                const selectedRating = document.querySelector(
+                    'input[name="rating"]:checked',
+                ).id;
+
+                if (selectedRating === "positiveRating") {
+                    rating = "👍";
+                } else if (selectedRating === "negativeRating") {
+                    rating = "👎";
+                } else {
+                    rating = "No rating";
+                }
 
                 const newBook = { title: bookTitle, rating: rating };
                 books.push(newBook);
+                showShelf();
 
+                document.getElementById("bookTitle").value = "";
+                document.getElementById("positiveRating").checked = false;
+                document.getElementById("negativeRating").checked = false;
+
+                saveBooksToLocalStorage();
+            }
+
+            function saveBooksToLocalStorage() {
+                let booksJSON = JSON.stringify(books);
+                localStorage.setItem("books", booksJSON);
+            }
+
+            function loadBooksFromLocalStorage() {
+                let booksJSON = localStorage.getItem("books");
+                if (booksJSON) {
+                    books = JSON.parse(booksJSON);
+                } else {
+                    books = [];
+                }
+
+                showShelf();
+            }
+
+            function showShelf() {
                 shelfDiv = document.getElementById("shelf");
 
                 shelfDiv.innerHTML =
@@ -36,8 +84,6 @@
                         )
                         .join("") +
                     "</ul>";
-                document.getElementById("bookTitle").value = "";
-                document.getElementById("rating").value = "";
             }
         </script>
     </body>
